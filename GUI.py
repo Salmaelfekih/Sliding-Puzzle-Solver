@@ -12,7 +12,7 @@ import BFS as bfs
 t =Tk()
 t.geometry(f"650x650+{int(GetSystemMetrics(0)/2)-300}+40")
 t.title((" "*80)+"Sliding Puzzle")
-
+global f
 f=Frame(t,bg="#002960")
 f.place(x=0,y=0,width=2000,height=2000)
 
@@ -43,8 +43,8 @@ def display_graph(arr):
 
 
 def run_external_script_A():
-    print("ok")
-    execution_time, visited_nodes, generated_nodes = a_star.solve(display_graph)
+
+    execution_time, visited_nodes, generated_nodes = a_star.solve(display_graph,f,images_refs)
     Output1.config(state=NORMAL)
     Output1.delete(1.0, END)
     Output1.insert(END, f'Time Execution is: {execution_time:.2f} seconds')
@@ -63,7 +63,7 @@ def run_external_script_A():
     
 def run_external_script_BFS():
     
-    execution_time, visited_nodes, generated_nodes = bfs.solve(display_graph)
+    execution_time, visited_nodes, generated_nodes = bfs.solve(tools.display_graph,f,images_refs)
     Output1.config(state=NORMAL)
     Output1.delete(1.0, END)
     Output1.insert(END, f'Time Execution is: {execution_time:.2f} seconds')
@@ -82,7 +82,7 @@ def run_external_script_BFS():
 
 def run_menu():
     tools.menu(tools.arr)
-    display_graph(tools.arr)
+    tools.display_graph(tools.arr,f,images_refs)
     
 
 arr = array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
@@ -105,11 +105,7 @@ Output3.insert(END,'Visited nodes :')
 Output3.config(state=DISABLED)
 
 
-
-#display_graph(tools.arr)
-        
+tools.display_graph(tools.arr,f,images_refs)
 
 
-
-#t.mainloop()*
-print(a_star.solve(display_graph))
+t.mainloop()

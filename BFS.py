@@ -2,10 +2,8 @@ from numpy import array
 import numpy as np
 import time
 import tools as t
-def solve(display_graph_fn):
+def solve(display_graph, frame, images_refs):
     start_time = time.time()
-    #arr = array([[0]*3]*3)
-    #t.menu(arr)
     l1=[]
     g=[] #list of generated nodes
     j=0
@@ -27,7 +25,7 @@ def solve(display_graph_fn):
                 g.append(arr1)
                 if(t.Final_State(arr1)):
                     c = 1
-                    display_graph_fn(arr1)
+                    display_graph(arr1,frame,images_refs)
                     break
             if (len(l)!=0 and l[0]=='U'):
                 arr2=t.up(l1[0],a,b)
@@ -36,7 +34,7 @@ def solve(display_graph_fn):
                 g.append(arr2)
                 if(t.Final_State(arr2)):
                     c = 1
-                    display_graph_fn(arr2)
+                    display_graph(arr2,frame,images_refs)
                     break
                 
             if (len(l)!=0 and l[0]=='R'):
@@ -46,7 +44,7 @@ def solve(display_graph_fn):
                 g.append(arr3)
                 if(t.Final_State(arr3)):
                     c = 1
-                    display_graph_fn(arr3)
+                    display_graph(arr3,frame,images_refs)
                     break
                 
             if (len(l)!=0 and l[0]=='L'):
@@ -56,12 +54,12 @@ def solve(display_graph_fn):
                 g.append(arr4)
                 if(t.Final_State(arr4)):
                     c = 1
-                    display_graph_fn(arr4)
+                    display_graph_fn(arr4,frame,iamges_refs)
                     break
         if(c == 1):
             break
         l1.pop(0)
-        display_graph_fn(l1[0])
+        display_graph(l1[0],frame,images_refs)
     end_time = time.time()
     execution_time = end_time - start_time
     return execution_time ,j ,len(g)

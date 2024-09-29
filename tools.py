@@ -1,5 +1,8 @@
 from numpy import array
 import numpy as np
+from PIL import Image,ImageTk
+from tkinter import *
+
 
 def menu(arr):
     empty=True 
@@ -24,8 +27,8 @@ def menu(arr):
                     break
     
       
-arr = array([[1, 2, 3], [8, 6, -1], [5, 7, 4]])
-#menu(arr)
+arr = array([[0,0,0], [0,0,0], [0,0,0]])
+menu(arr)
 
 def search(arr): # search for empty box
     for i in range(3):
@@ -33,16 +36,10 @@ def search(arr): # search for empty box
             if(arr[i,j]==-1):
                 return i,j
 
-def comparison(arr,a):
-    for i in range(3):
-        for j in range(3):
-            if a[i,j]!=arr[i,j]:
-                return False
-    return True
     
 def exist(arr,l):
     for i in l:
-        if comparison(arr,i):
+        if np.array_equal(np.array(i), np.array(arr)):
             return True
     return False
 
@@ -107,13 +104,15 @@ def in_place(arr): #function to determine the number of boxes that are not in pl
     return i1
 
 
-
-def display_graph(arr):
-    cmp=0
+def display_graph(arr,f, images_refs):
+    
+    lf = []
+    lab = []
+    cmp = 0
     for i in range(3):
      for j in range(3):
          lf.append(Frame(f, highlightbackground="white", highlightthickness=3))
-         lab.append(Label(lf[cmp], image=cropped_images[arr[i, j] - 1 if arr[i, j] != -1 else 8], background="#3b53a0"))
+         lab.append(Label(lf[cmp], image=images_refs[arr[i, j] - 1 if arr[i, j] != -1 else 8], background="#3b53a0"))
          lab[cmp].place(x=2, y=2, width=300, height=300)
          lf[cmp].place(x=j * 300, y=i * 300, width=300, height=300)
          cmp += 1
